@@ -4,7 +4,7 @@
 account_amount = 2  # Number of accounts to generate
 
 # Email agent settings - required
-email_agent = "10minutemail"  # The email agent to generate a disposable email
+email_agent = "10minemail"  # The email agent to generate a disposable email
 
 # Proxy settings - optional
 # proxy_path = "/path/to/proxy-list.txt"

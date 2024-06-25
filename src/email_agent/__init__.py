@@ -1,3 +1,3 @@
-from .ten_minute_mail import TenMinuteMail
+from .ten_min_mail import TenMinEmail
 
-__all__ = ["TenMinuteMail"]
+__all__ = ["TenMinEmail"]

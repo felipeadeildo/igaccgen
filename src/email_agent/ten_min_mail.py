@@ -2,12 +2,13 @@ import json
 from typing import Optional
 
 import httpx
+
 from src.email_agent.base import EmailAgent
 from src.utils.common import get_random_user_agent
 
 
-class TenMinuteMail(EmailAgent):
-    """10MinuteMail.com email agent"""
+class TenMinEmail(EmailAgent):
+    """10minemail.com email agent"""
 
     def generate_email(self) -> Optional[str]:
         """Generates an email using the config with fake data
@@ -17,10 +18,11 @@ class TenMinuteMail(EmailAgent):
             None: If some error occurred
         """
         self.session = httpx.Client(
-            base_url="https://web2.10minutemail.com",
+            base_url="https://web2.10minemail.com",
             headers={
                 "User-Agent": get_random_user_agent(),
                 "Content-Type": "application/json",
+                "Referer": "https://10minemail.com",
             },
         )
 
@@ -45,12 +47,16 @@ class TenMinuteMail(EmailAgent):
         """
         messages = self.session.get("/messages").json()["messages"]
 
-        # TODO: rewrite this to parse a real case of a instagram signup sent code.
-        return next(
+        message_code_subject = next(
             (
-                message["body"]
+                message["subject"]
                 for message in messages
-                if "Confirm" in message["subject"]
+                if "instagram" in message["from"].lower()
             ),
             None,
         )
+        if message_code_subject is None:
+            return None
+
+        # The subject follows this pattern: "123456 is your Instagram code"
+        return message_code_subject.split(maxsplit=1)[0]
