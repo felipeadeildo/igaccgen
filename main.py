@@ -1,14 +1,13 @@
 import tomllib
 
-from constants import CONFIG_PATH
-from ig import InstagramClient
+from src.instagram import InstagramClient
+from src.utils.constants import CONFIG_PATH
 
 
 def main() -> None:
     """
     Main function
     """
-
     if CONFIG_PATH.exists():
         config = tomllib.load(CONFIG_PATH.open("rb"))
     else:

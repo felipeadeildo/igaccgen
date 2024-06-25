@@ -1,15 +1,7 @@
-import os
 import random
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
-
-from constants import CLEAR_SCREEN_CMD
-
-
-def clear_screen():
-    """Clears the screen"""
-    os.system(CLEAR_SCREEN_CMD)
 
 
 @dataclass
