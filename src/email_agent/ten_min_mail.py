@@ -34,7 +34,7 @@ class TenMinEmail(EmailAgent):
 
         self.session.headers["Authorization"] = f"Bearer {data['token']}"
 
-        self.email = data["email"]
+        self.email = data["mailbox"]
 
         return self.email
 

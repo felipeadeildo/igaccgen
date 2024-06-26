@@ -1,5 +1,5 @@
 import random
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional
 
@@ -9,12 +9,15 @@ class Proxy:
     """Proxy credentials data representation"""
 
     ip: str
-    port: int = field(init=False)
+    port: str
     username: Optional[str] = None
     password: Optional[str] = None
 
-    def __post_init__(self):
-        self.port = int(self.port)
+    def __str__(self):
+        if self.username is None or self.password is None:
+            return f"https://{self.ip}:{self.port}"
+        else:
+            return f"https://{self.username}:{self.password}@{self.ip}:{self.port}"
 
 
 def get_random_proxy(config: dict) -> Optional[Proxy]:
@@ -23,7 +26,7 @@ def get_random_proxy(config: dict) -> Optional[Proxy]:
     Args:
         config (dict): The config to be used
     """
-    proxy_path = Path(config["proxy_path"])
+    proxy_path = Path(config.get("proxy_path", "proxy.txt"))
     if not proxy_path.exists():
         return None
     proxies = proxy_path.read_text().split("\n")

@@ -1,5 +1,7 @@
 import tomllib
 
+from icecream import ic
+
 from src.instagram import InstagramClient
 from src.utils.constants import CONFIG_PATH
 
@@ -21,4 +23,6 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    ic.configureOutput(includeContext=True)
+    ic.disable()
     main()
