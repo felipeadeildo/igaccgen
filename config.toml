@@ -3,8 +3,14 @@
 # General settings - required
 account_amount = 2  # Number of accounts to generate
 
-# Email agent settings - required
-email_agent = "10minemail"  # The email agent to generate a disposable email
+# Email agent settings is a provicer to generate a disposable email
+# Available agents: 10minemail (10minemail.com)
+email_agent = "10minemail"
+
+# Fake Person Generator is the source provider of fake data to full fill account signup form
+# Available generators: fake_name_generator (fakenamegenerator.com)
+fake_person_generator = "fake_name_generator"
+
 
 # Proxy settings - optional
 # proxy_path = "/path/to/proxy-list.txt"
